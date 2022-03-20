@@ -17,4 +17,4 @@ jobs:
           server: ftp.stackcp.com
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /public_html/staging.fenka.co.uk/
+          server-dir: /public_html/_staging/
