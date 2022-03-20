@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" viewBox="0 0 387 80" style="enable-background:new 0 0 387 80;" xml:space="preserve">
+<style type="text/css">
+
+	.logo--f{fill:#06e39d;}
+	.logo--e{fill:#06e39d;}
+	.logo--n{fill:#06e39d;}
+	.logo--k{fill:#06e39d;}
+	.logo--a{fill:#06e39d;}
+
+</style>
+<defs>
+</defs>
+<path class="logo--f" d="M0 80.383V0h58.931v18.077H20.728V30.61h37.359v18.077H20.728v31.695H0z"/>
+<path class="logo--e" d="M70.138 80.383V0h58.931v18.077H90.867V30.61h37.359v18.077H90.867v13.618h38.203v18.077H70.138z"/>
+<path class="logo--n" d="M195.833 80.383l-33.985-46.519v46.519H141.12V0h21.331l32.539 44.229V0h20.849v80.383H195.833z"/>
+<path class="logo--k" d="M277.541 80.383l-21.09-30.249l-5.423 6.749v23.5H230.3V0h20.728v33.021L275.733 0h25.549l-31.213 37.6 l32.9 42.782H277.541z"/>
+<path class="logo--a" d="M363.708 80.383l-3.977-11.569h-31.695l-3.977 11.569h-23.5L330.808 0h26.151l30.249 80.383H363.708z M343.944 20.487l-10.244 30.249h20.367L343.944 20.487z"/>
+</svg>
