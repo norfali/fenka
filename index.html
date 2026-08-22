@@ -3,82 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <title>Fenka</title>
-    <meta name="description" content="FENKA - Portfolio of Nadhim Orfali" />
+
+    <meta
+      name="description"
+      content="FENKA - Portfolio of Nadhim Orfali"
+    />
+
     <meta property="og:title" content="FENKA" />
-    <meta property="og:url" content="http://www.fenka.co.uk" />
-    <meta property="og:type" content="Website" />
+    <meta property="og:url" content="https://www.fenka.co.uk" />
+    <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FENKA - Nadhim Orfali" />
     <meta
       property="og:image"
-      content="http://www.fenka.co.uk/img/og-fenka.png"
+      content="https://www.fenka.co.uk/og-fenka.png"
     />
     <meta
       property="og:description"
       content="FENKA - Portfolio of Nadhim Orfali"
     />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="/apple-touch-icon-57x57.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="60x60"
-      href="/apple-touch-icon-60x60.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="/apple-touch-icon-72x72.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="/apple-touch-icon-76x76.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="/apple-touch-icon-114x114.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="/apple-touch-icon-120x120.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      href="/apple-touch-icon-144x144.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="/apple-touch-icon-152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/apple-touch-icon-180x180.png"
-    />
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/android-chrome-192x192.png"
-      sizes="192x192"
-    />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="msapplication-TileColor" content="#2F2F2F" />
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link
       rel="stylesheet"
-      href="http://fonts.googleapis.com/css?family=Inconsolata"
+      href="https://fonts.googleapis.com/css?family=Inconsolata"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -89,7 +44,7 @@
         <div class="header__logo">
           <div class="header__logo-inner">
             <a href="/" title="FENKA"
-              ><img src="img/fenka-logo.svg" alt="FENKA"
+              ><img src="fenka-logo.svg" alt="FENKA"
             /></a>
           </div>
         </div>
@@ -210,7 +165,50 @@
           itemscope
           itemtype="http://schema.org/Article"
           class="recent-projects__featured"
+        >
+          <header class="content__section-header">
+            <h1>Side Projects</h1>
+            <h2 itemprop="headline">MyRolora</h2>
+          </header>
+          <div class="content__wysiwyg">
+            <div class="recent-projects__summary">
+              <p>
+                I’d been kicking around the idea for MyRolora for years (around 15 years!). Whenever I was job hunting, I’d end up tracking applications in an Excel spreadsheet and thinking there had to be a better way. I recently found my old “Ideas” notebook, complete with sketches and a database design, so I finally decided to build it — somewhere to keep applications, progress and all the other bits of a job search in one place.
+              </p>
+              <ul class="list-items recent-projects__tech">
+                <li>Next.js</li>
               </ul>
+              <p>
+                <a
+                  href="https://myrolora.com"
+                  title="Visit MyRolora"
+                  class="recent-projects__link"
+                  >Visit MyRolora</a
+                >
+              </p>
+            </div>
+          </div>
+        </article>
+        <article class="recent-projects__item">
+          <div class="content__wysiwyg">
+            <div class="recent-projects__summary">
+              <h2 itemprop="headline" class="article-title">
+                Ugly Game Awards
+              </h2>
+              <p>
+                A fun project inspired by the Razzies, Ugly Game Awards is a place to vote on the dives, dirty play, poor sportsmanship and all the other ugly bits of the beautiful game!
+              </p>
+              <ul class="list-items recent-projects__tech">
+                <li>Next.js</li>
+              </ul>
+              <p>
+                <a
+                  href="https://uglygameawards.com"
+                  title="Visit Ugly Game Awards"
+                  class="recent-projects__link"
+                  >Visit Ugly Game Awards</a
+                >
+              </p>
             </div>
           </div>
         </article>
@@ -257,8 +255,7 @@
             <div class="recent-projects__summary">
               <h2 itemprop="headline" class="article-title">Royal Mint</h2>
               <p>
-                Rewritten & rebuilt to bring a 4-year-old complex website to a
-                version that serves a wide range of users including IE8.
+                As one of the lead engineers on the Royal Mint’s ecommerce website, building it from scratch with Sitecore. This was back when Internet Explorer 8 was still something we had to support, which made things interesting at times.
               </p>
               <p></p>
               <ul class="list-items recent-projects__tech">
@@ -285,10 +282,9 @@
                 Visit Britain & TfL
               </h2>
               <p>
-                A highly complex and high pressurised project with many
-                stakeholders and comprising of around 6 separate projects with
-                its own set of requirements. The multilingual project launched
-                live in May 2015 in more than 41 countries.
+                I was one of the lead engineers on what turned into a long-running programme for VisitBritain and Transport for London. What looked like one project from the outside was actually six separate projects, each with its own requirements, ultimately made available across 41 countries.
+                <br>
+                The programme launched in 2015.
               </p>
               <ul class="list-items recent-projects__tech">
                 <li>HTML5</li>
@@ -337,9 +333,56 @@
         <article class="testimonials__intro">
           <header class="content__section-header">
             <h1>Testimonials</h1>
-            <h2>Happy clients...</h2>
-          </header>
+            <h2>Kind words</h2>
+          </header>          
           <div class="content__wysiwyg">
+            <div
+              itemprop="review"
+              itemscope="itemscope"
+              itemtype="http://schema.org/Person"
+              class="testimonials__item"
+            >
+              <p itemprop="description" class="testimonials__item-review">
+                Nad carries a lot of fun and positive energy while also pushing
+                everyone around him to write quality code. He always pushed me
+                to make UI components accessible and never take shortcuts. Nad
+                was a great mentor to me.
+              </p>
+              <p itemprop="name" class="testimonials__item-client">
+                Former engineer, Morningstar — Chicago
+              </p>
+            </div>
+            <div
+              itemprop="review"
+              itemscope="itemscope"
+              itemtype="http://schema.org/Person"
+              class="testimonials__item"
+            >
+              <p itemprop="description" class="testimonials__item-review">
+                Brilliant teammate, competent and attentive to details, bright
+                personality.
+              </p>
+              <p itemprop="name" class="testimonials__item-client">
+                Former colleague — Milan
+              </p>
+            </div>
+            <div
+              itemprop="review"
+              itemscope="itemscope"
+              itemtype="http://schema.org/Person"
+              class="testimonials__item"
+            >
+              <p itemprop="description" class="testimonials__item-review">
+                Nadhim is an incredibly talented engineer that any design system
+                or accessibility team would be lucky to have. He excels at
+                working in close collaboration with design partners and always
+                finds the best balance between UX goals, engineering
+                constraints, and inclusive practices.
+              </p>
+              <p itemprop="name" class="testimonials__item-client">
+                Former designer/engineer, Morningstar — Chicago
+              </p>
+            </div>
             <div
               itemprop="review"
               itemscope="itemscope"

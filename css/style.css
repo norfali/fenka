@@ -2576,11 +2576,13 @@ ul {
   border-bottom: 1px solid #ffffff;
 }
 
+
 @media screen and (min-width: 720px) {
   .testimonials__item {
     margin-left: 33.984375%;
   }
 }
+
 
 .list-items {
   list-style: none;
