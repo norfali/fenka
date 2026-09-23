@@ -2451,6 +2451,17 @@ ul {
   .content__section-header h1:last-child {
     margin-right: 0;
   }
+  .content__section-header-aside {
+    float: left;
+    display: block;
+    margin-right: 1.953125%;
+    width: 32.03125%;
+  }
+  .content__section-header-aside h1 {
+    float: none;
+    margin-right: 0;
+    width: auto;
+  }
   .content__section-header h2 {
     float: left;
     display: block;
@@ -2520,6 +2531,33 @@ ul {
 .profile__link:hover {
   color: #ffffff;
   border-bottom: 1px solid #ffffff;
+}
+.profile-introduction {
+  margin-bottom: 21.875px;
+}
+@media screen and (max-width: 719px) {
+  .profile-introduction {
+    margin-bottom: 12.5px;
+  }
+}
+.profile-introduction__button {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #06e39d;
+  color: #06e39d;
+  padding: 0;
+  text-decoration: none;
+}
+.profile-introduction__button:hover {
+  color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.profile-introduction__button:focus {
+  outline: 3px solid #ffbf47;
+}
+.profile-introduction__icon {
+  display: inline-block;
+  margin-right: 6px;
 }
 
 .article-title {

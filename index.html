@@ -54,7 +54,29 @@
       <section class="content__section profile">
         <article class="profile__intro">
           <header class="content__section-header">
-            <h1>Hi there..</h1>
+            <div class="content__section-header-aside">
+              <h1>Hi there..</h1>
+              <div class="profile-introduction">
+                <button
+                  type="button"
+                  class="profile-intro__button"
+                  aria-controls="profile-intro-audio"
+                  aria-label="Play introduction"
+                >
+                  <span class="profile-intro__icon" aria-hidden="true">▶</span>
+                  <span>Fancy an intro?</span>
+                </button>
+                <audio
+                  id="profile-intro-audio"
+                  class="profile-intro__audio"
+                  preload="metadata"
+                  hidden
+                >
+                  <source src="audio/intro.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
             <h2>
               I'm a Lead Software Engineer at Morningstar.
             </h2>
@@ -512,6 +534,48 @@
       );
       ga("create", "UA-62544729-1", "auto");
       ga("send", "pageview");
+    </script>
+    <script>
+      (function () {
+        var button = document.querySelector(".profile-intro__button");
+        var icon = document.querySelector(".profile-intro__icon");
+        var audio = document.getElementById("profile-intro-audio");
+
+        if (!button || !icon || !audio) {
+          return;
+        }
+
+        function setPlaying(isPlaying) {
+          icon.textContent = isPlaying ? "■" : "▶";
+          button.setAttribute(
+            "aria-label",
+            isPlaying ? "Stop introduction" : "Play introduction"
+          );
+        }
+
+        button.addEventListener("click", function () {
+          if (!audio.paused) {
+            audio.pause();
+            audio.currentTime = 0;
+            setPlaying(false);
+            return;
+          }
+
+          var playback = audio.play();
+          if (playback && playback.catch) {
+            playback.then(function () {
+              setPlaying(true);
+            }).catch(function () {});
+          } else {
+            setPlaying(true);
+          }
+        });
+
+        audio.addEventListener("ended", function () {
+          audio.currentTime = 0;
+          setPlaying(false);
+        });
+      })();
     </script>
   </body>
 </html>
