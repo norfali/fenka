@@ -77,9 +77,8 @@
                   id="profile-intro-audio"
                   class="profile-intro__audio"
                   preload="metadata"
-                  hidden
                 >
-                  <source src="audio/introduction.mp3" type="audio/mpeg" />
+                  <source src="intro.mp3" type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
@@ -614,18 +613,24 @@
           if (!audio.paused) {
             audio.pause();
             audio.currentTime = 0;
-            setPlaying(false);
             return;
           }
 
           var playback = audio.play();
           if (playback && playback.catch) {
-            playback.then(function () {
-              setPlaying(true);
-            }).catch(function () {});
-          } else {
-            setPlaying(true);
+            playback.catch(function (error) {
+              console.error("Unable to play the audio introduction.", error);
+              setPlaying(false);
+            });
           }
+        });
+
+        audio.addEventListener("play", function () {
+          setPlaying(true);
+        });
+
+        audio.addEventListener("pause", function () {
+          setPlaying(false);
         });
 
         audio.addEventListener("ended", function () {
