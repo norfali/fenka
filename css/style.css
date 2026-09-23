@@ -2532,15 +2532,15 @@ ul {
   color: #ffffff;
   border-bottom: 1px solid #ffffff;
 }
-.profile-introduction {
+.profile-intro {
   margin-bottom: 21.875px;
 }
 @media screen and (max-width: 719px) {
-  .profile-introduction {
+  .profile-intro {
     margin-bottom: 12.5px;
   }
 }
-.profile-introduction__button {
+.profile-intro__button {
   background: transparent;
   border: 0;
   border-bottom: 1px solid #06e39d;
@@ -2548,14 +2548,14 @@ ul {
   padding: 0;
   text-decoration: none;
 }
-.profile-introduction__button:hover {
+.profile-intro__button:hover {
   color: #ffffff;
   border-bottom-color: #ffffff;
 }
-.profile-introduction__button:focus {
+.profile-intro__button:focus {
   outline: 3px solid #ffbf47;
 }
-.profile-introduction__icon {
+.profile-intro__icon {
   display: inline-block;
   margin-right: 6px;
 }
