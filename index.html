@@ -56,7 +56,7 @@
           <header class="content__section-header">
             <div class="content__section-header-aside">
               <h1>Hi there..</h1>
-              <div class="profile-introduction">
+              <div class="profile-intro">
                 <button
                   type="button"
                   class="profile-intro__button"
@@ -64,7 +64,14 @@
                   aria-label="Play introduction"
                 >
                   <span class="profile-intro__icon" aria-hidden="true">▶</span>
-                  <span>Fancy an intro?</span>
+                  <span>Listen to my intro</span>
+                </button>
+                <button
+                  type="button"
+                  class="profile-intro__button profile-intro__transcript-button"
+                  aria-controls="profile-intro-transcript-dialog"
+                >
+                  <span>Read the transcript</span>
                 </button>
                 <audio
                   id="profile-intro-audio"
@@ -72,7 +79,7 @@
                   preload="metadata"
                   hidden
                 >
-                  <source src="intro.mp3" type="audio/mpeg" />
+                  <source src="audio/introduction.mp3" type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
@@ -506,6 +513,47 @@
         </article>
       </section>
     </div>
+    <dialog
+      id="profile-intro-transcript-dialog"
+      class="transcript-dialog"
+      aria-labelledby="profile-intro-transcript-title"
+    >
+      <div class="transcript-dialog__inner">
+        <header class="transcript-dialog__header">
+          <h2 id="profile-intro-transcript-title">Audio transcript</h2>
+          <button
+            type="button"
+            class="transcript-dialog__close"
+            aria-label="Close transcript"
+          >
+            Close
+          </button>
+        </header>
+        <div class="transcript-dialog__content">
+          <p>
+            Hey, my name is Nad. I'm a Lead Software Engineer based in London.
+          </p>
+          <p>
+            Fenka is my online home. I care as much about how software gets built as the finished product, and I'm slightly obsessed with developer experience — whether that means better design systems, less friction, smarter testing, simpler pipelines, or improving the processes around the code.
+          </p>
+          <p>
+            I've spent several years helping build and evolve the Morningstar Design System, but these days my work is much broader, spanning developer tooling, CI/CD and infrastructure, security, AI and agent workflows, and data visualisation.
+          </p>
+          <p>
+            I also enjoy building things of my own. My side projects include MyRolora, an application for managing the job-search process, and Ugly Game Awards — my rather less serious celebration of dives, dirty play, poor sportsmanship, and the uglier side of the beautiful game. The recent World Cup may have had something to do with it.
+          </p>
+          <p>
+            I'm particularly interested in AI-assisted software engineering — particularly how agents can improve developer workflows, testing and quality.
+          </p>
+          <p>
+            And if you're wondering about the voice — that's George from ElevenLabs. Just another little experiment!
+          </p>
+          <p>
+            Have a look around — and thanks for visiting Fenka.
+          </p>
+        </div>
+      </div>
+    </dialog>
     <footer class="footer">
       <div class="footer__container">
         <p class="footer__copyright">&copy; 2026 FENKA</p>
@@ -540,6 +588,15 @@
         var button = document.querySelector(".profile-intro__button");
         var icon = document.querySelector(".profile-intro__icon");
         var audio = document.getElementById("profile-intro-audio");
+        var transcriptButton = document.querySelector(
+          ".profile-intro__transcript-button"
+        );
+        var transcriptDialog = document.getElementById(
+          "profile-intro-transcript-dialog"
+        );
+        var transcriptClose = document.querySelector(
+          ".transcript-dialog__close"
+        );
 
         if (!button || !icon || !audio) {
           return;
@@ -575,6 +632,27 @@
           audio.currentTime = 0;
           setPlaying(false);
         });
+
+        if (transcriptButton && transcriptDialog && transcriptClose) {
+          transcriptButton.addEventListener("click", function () {
+            transcriptDialog.showModal();
+            transcriptClose.focus();
+          });
+
+          transcriptClose.addEventListener("click", function () {
+            transcriptDialog.close();
+          });
+
+          transcriptDialog.addEventListener("click", function (event) {
+            if (event.target === transcriptDialog) {
+              transcriptDialog.close();
+            }
+          });
+
+          transcriptDialog.addEventListener("close", function () {
+            transcriptButton.focus();
+          });
+        }
       })();
     </script>
   </body>
