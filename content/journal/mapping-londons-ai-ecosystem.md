@@ -4,7 +4,7 @@ description: How mapping London’s AI workplaces turned into a miniature city w
 subtitle: An interactive exploration of London's growing AI scene, complete with miniature buildings, AI-assisted research and tiny moving trains.
 topic: Data Visualisation
 date: 2026-11-21
-draft: true
+draft: false
 project: london-ai-atlas
 ---
 

@@ -101,7 +101,7 @@ test('navigation and project details work on the static site', async ({
     page.getByRole('img', { name: /Old Street and Shoreditch/ }),
   ).toBeVisible();
   const explore = page.getByRole('link', { name: 'Explore London AI Atlas ↗' });
-  await expect(explore).toHaveAttribute('href', 'https://ai-london.fenka.co.uk/');
+  await expect(explore).toHaveAttribute('href', 'https://atlas.fenka.co.uk/');
   await expect(explore).toHaveAttribute('target', '_blank');
   await expect(explore).toHaveAttribute('rel', 'noopener noreferrer');
   expect((await page.request.get('/images/london-ai-atlas.webp')).ok()).toBe(true);

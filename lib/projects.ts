@@ -106,7 +106,7 @@ export const featuredProjects = [
     ],
     external: {
       label: 'Explore London AI Atlas ↗',
-      href: 'https://ai-london.fenka.co.uk/',
+      href: 'https://atlas.fenka.co.uk/',
     },
     relatedIntro:
       "There's a bit more to the story, from building miniature London to getting AI agents to help track down company offices.",
