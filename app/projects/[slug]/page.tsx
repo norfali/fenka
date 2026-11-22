@@ -5,7 +5,7 @@ import {
   ProjectVisual,
   TechnicalList,
 } from '@/components/editorial';
-import { journalEntry } from '@/lib/journal';
+import { journalEntries } from '@/lib/journal';
 import { featuredProjects } from '@/lib/projects';
 import { pageMetadata } from '@/lib/site';
 
@@ -28,7 +28,12 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = featuredProjects.find((item) => item.slug === slug);
   if (!project) notFound();
-  const related = journalEntry(project.journal);
+  const isAtlas = project.slug === 'london-ai-atlas';
+  const related = journalEntries().filter((entry) =>
+    entry.project
+      ? entry.project === slug
+      : 'journal' in project && entry.slug === project.journal,
+  );
 
   return (
     <article className="detail-page">
@@ -36,15 +41,33 @@ export default async function ProjectPage({ params }: Props) {
         All projects
       </Link>
       <PageIntro label={project.label} title={project.title}>
-        <p>{project.intro}</p>
-        <TechnicalList items={project.technologies} />
+        {project.intro.map((paragraph, index) => (
+          <p key={paragraph} className={index > 0 ? 'mt-3' : undefined}>
+            {paragraph}
+          </p>
+        ))}
+        <TechnicalList items={project.detailTechnologies} />
+        <p className="mt-4">
+          <a
+            className="button-link"
+            href={project.external.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {project.external.label}
+          </a>
+        </p>
       </PageIntro>
       <figure className="detail-figure">
         <ProjectVisual slug={project.slug} />
         {project.slug === 'london-ai-atlas' && (
           <figcaption>
             Old Street &amp; Shoreditch · Map data ©{' '}
-            <a href="https://www.openstreetmap.org/copyright">
+            <a
+              href="https://www.openstreetmap.org/copyright"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               OpenStreetMap contributors
             </a>
           </figcaption>
@@ -54,23 +77,26 @@ export default async function ProjectPage({ params }: Props) {
         {project.sections.map(({ title, body }) => (
           <section key={title}>
             <h2 className="display">{title}</h2>
-            <p>{body}</p>
+            {body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </section>
         ))}
-        {'external' in project && (
-          <p>
-            <a className="button-link" href={project.external.href}>
-              {project.external.label}
-            </a>
-          </p>
-        )}
-        {related && (
+        {related.length > 0 && (
           <section className="related">
-            <h2 className="display">From my writing</h2>
-            <Link className="article-link" href={`/writing/${related.slug}/`}>
-              {related.title}
-            </Link>
-            {related.draft && <span className="eyebrow ml-3">Draft</span>}
+            <h2 className="display">Want to know more?</h2>
+            <p>{project.relatedIntro}</p>
+            {related.map((entry) => (
+              <p key={entry.slug}>
+                <Link className="article-link" href={`/writing/${entry.slug}/`}>
+                  {entry.title}
+                  {isAtlas && ' ↗'}
+                </Link>
+                {entry.draft && !isAtlas && (
+                  <span className="eyebrow ml-3">Draft</span>
+                )}
+              </p>
+            ))}
           </section>
         )}
       </div>

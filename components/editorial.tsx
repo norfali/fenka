@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { formatJournalDate, type JournalEntry } from '@/lib/journal';
-import { featuredProjects } from '@/lib/projects';
+import {
+  featuredProjects,
+  independentProjects,
+  londonAiAtlasScreenshot,
+} from '@/lib/projects';
 
 type Project = (typeof featuredProjects)[number];
 
@@ -54,7 +58,7 @@ export function ProjectVisual({ slug }: { slug: Project['slug'] }) {
       <div className="project-art atlas-art">
         {/* This pre-sized WebP is shared by all static routes. */}
         <img
-          src="/images/london-ai-atlas.webp"
+          src={londonAiAtlasScreenshot}
           width="1160"
           height="648"
           alt="Isometric view of Old Street and Shoreditch in London AI Atlas"
@@ -104,7 +108,13 @@ export function TechnicalList({ items }: { items: readonly string[] }) {
   );
 }
 
-export function ProjectCards() {
+export function ProjectCards({
+  includeIndependent = false,
+  heading: Heading = 'h3',
+}: {
+  includeIndependent?: boolean;
+  heading?: 'h2' | 'h3';
+}) {
   return (
     <div className="grid gap-8 md:grid-cols-2">
       {featuredProjects.map((project, index) => (
@@ -123,16 +133,42 @@ export function ProjectCards() {
           </div>
           <div className="card-copy">
             <p className="eyebrow">{project.label}</p>
-            <h3 className="item-title">
+            <Heading className="item-title">
               <Link className="card-link" href={`/projects/${project.slug}/`}>
                 {project.title}
               </Link>
-            </h3>
-            <p className="card-summary">{project.summary}</p>
+            </Heading>
+            <p className="card-summary">{project.cardSummary}</p>
           </div>
           <TechnicalList items={project.technologies} />
         </article>
       ))}
+      {includeIndependent && independentProjects.map(
+        ({ title, summary, href, technologies, art }, index) => (
+          <article
+            className="project-card product-card"
+            data-scroll-reveal={index}
+            key={title}
+          >
+            {art && (
+              <div className={`product-art ${art}-art`} aria-hidden="true">
+                <i />
+                <i />
+                <i />
+              </div>
+            )}
+            <div className="card-copy">
+              <Heading className="item-title">
+                <a className="card-link" href={href}>
+                  {title}
+                </a>
+              </Heading>
+              <p className="card-summary">{summary}</p>
+            </div>
+            <TechnicalList items={technologies} />
+          </article>
+        ),
+      )}
     </div>
   );
 }

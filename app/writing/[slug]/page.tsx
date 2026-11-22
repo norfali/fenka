@@ -32,7 +32,11 @@ export default async function JournalArticle({ params }: Props) {
   const { slug } = await params;
   const entry = journalEntry(slug);
   if (!entry) notFound();
-  const project = featuredProjects.find((item) => item.journal === slug);
+  const project = featuredProjects.find((item) =>
+    entry.project
+      ? item.slug === entry.project
+      : 'journal' in item && item.journal === slug,
+  );
 
   return (
     <article className="detail-page journal-article">
@@ -42,7 +46,9 @@ export default async function JournalArticle({ params }: Props) {
       <header className="page-intro article-intro" data-page-entry>
         <p className="eyebrow">{entry.topic}</p>
         <h1 className="display">{entry.title}</h1>
-        <p className="lede">{entry.description}</p>
+        <p className="lede">
+          {entry.subtitle ? <em>{entry.subtitle}</em> : entry.description}
+        </p>
         <p className="article-meta">
           <span>{author}</span>
           {entry.draft ? (
@@ -64,7 +70,11 @@ export default async function JournalArticle({ params }: Props) {
         </Markdown>
         {project && (
           <p className="related">
-            Related project ·{' '}
+            {entry.project ? (
+              <strong>Related project:</strong>
+            ) : (
+              'Related project ·'
+            )}{' '}
             <Link href={`/projects/${project.slug}/`}>{project.title}</Link>
           </p>
         )}

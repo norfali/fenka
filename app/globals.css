@@ -604,7 +604,7 @@ button.text-link {
 .card-copy {
   padding: 1.15rem clamp(1rem, 2.2vw, 1.6rem) 1.4rem;
 }
-.card-copy h3 {
+.card-copy .item-title {
   font-size: clamp(1.45rem, 2.7vw, 2.25rem);
   margin: 0.26rem 0 0.4rem;
 }
@@ -817,8 +817,8 @@ button.text-link {
   padding-top: 1.2rem;
   margin-top: 2.75rem;
 }
-.journal-subscribe {
-  margin-block: 1.2rem 5rem;
+.journal-index {
+  margin-bottom: 5rem;
 }
 .site-footer {
   display: grid;

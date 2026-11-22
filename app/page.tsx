@@ -26,17 +26,17 @@ const engineeringFocus: {
     icon: 'connections',
     href: '/about/#applied-ai',
     summary:
-      'I integrate language models and tools into engineering workflows. I work on AI-assisted test generation, validate generated tests and use evaluations and traces to understand how agents reach their results.',
-    topics: ['MCP', 'LLM orchestration', 'Evaluation'],
+      'Building AI-powered engineering workflows, from agent-assisted test generation and validation to MCP integrations, evaluation and observability.',
+    topics: ['Python', 'MCP', 'LLM Orchestration', 'Evaluation'],
   },
   {
-    title: 'Developer platforms',
+    title: 'Developer Platforms',
     tone: 'cyan',
     icon: 'terminal',
     href: '/about/#developer-platforms',
     summary:
-      'I build developer tooling, automate build and release pipelines and work on the cloud infrastructure behind them. I focus on making delivery easier to reproduce and debug.',
-    topics: ['Developer experience', 'CI/CD', 'AWS'],
+      'Building the tooling, CI/CD pipelines and cloud-based foundations that help engineering teams develop, test and release software reliably.',
+    topics: ['AWS', 'GitHub', 'Harness', 'CI/CD'],
   },
   {
     title: 'Frontend Architecture',
@@ -44,8 +44,8 @@ const engineeringFocus: {
     icon: 'layers',
     href: '/about/#journey',
     summary:
-      'I develop shared UI architecture, from design tokens and component APIs to accessibility and migrations across framework versions.',
-    topics: ['Accessibility', 'Components', 'Design tokens'],
+      'Building shared frontend foundations, reusable components and design systems, with accessibility and developer experience at their core.',
+    topics: ['TypeScript', 'Vue', 'Design Systems', 'Accessibility'],
   },
 ];
 
@@ -67,11 +67,18 @@ export default function Home() {
             </em>
           </h1>
           <div className="hero-details">
-            <p className="lede">
-              I’ve spent over 20 years building software and improving how teams
-              deliver it. My work spans developer experience, cloud
-              infrastructure and applied AI.
-            </p>
+            <div className="lede space-y-4">
+              <p>
+                I'm a hands-on software engineer with over 20 years of experience
+                building software, solving complex problems and improving how
+                teams build and ship it.
+              </p>
+              <p>
+                My work spans frontend and backend engineering, developer
+                platforms, cloud infrastructure and applied AI. I still enjoy
+                getting stuck into the code as much as ever.
+              </p>
+            </div>
             <div className="intro-links">
               <a className="button-link" href="#selected-work">
                 Explore projects

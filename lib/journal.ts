@@ -7,9 +7,11 @@ export type JournalEntry = {
   slug: string;
   title: string;
   description: string;
+  subtitle?: string;
   topic: string;
   date: string;
   draft: boolean;
+  project?: string;
   body: string;
   readingTime: number;
 };
@@ -29,11 +31,15 @@ export function journalEntries({
       const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(source);
       if (!match) throw new Error(`Missing journal front matter in ${file}`);
       const [, frontMatter, body] = match;
-      const { title, description, topic, date, draft } =
+      const { title, description, subtitle, topic, date, draft, project } =
         parse(frontMatter) ?? {};
       if (
         ![title, description, topic, date].every(
           (value) => typeof value === 'string' && value.trim(),
+        ) ||
+        ![subtitle, project].every(
+          (value) =>
+            value === undefined || (typeof value === 'string' && value.trim()),
         ) ||
         !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
         !Number.isFinite(Date.parse(date)) ||
@@ -48,9 +54,11 @@ export function journalEntries({
         slug: file.slice(0, -3),
         title,
         description,
+        subtitle,
         topic,
         date,
         draft,
+        project,
         body,
         readingTime: Math.ceil(body.trim().split(/\s+/).length / 225),
       };

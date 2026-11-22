@@ -20,11 +20,6 @@ export default function Writing() {
       <div className="journal-index">
         <JournalList entries={journalEntries()} heading="h2" />
       </div>
-      <p className="journal-subscribe">
-        <a className="text-link" href="/feed.xml">
-          Subscribe via RSS
-        </a>
-      </p>
     </>
   );
 }
