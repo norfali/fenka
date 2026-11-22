@@ -4,7 +4,7 @@ The personal site of Nad Orfali at [fenka.co.uk](https://fenka.co.uk/). Next.js 
 
 ## Local development
 
-Use Node.js 22.13 or newer.
+Use Node.js 26.13.1, as pinned in `.nvmrc`. If you use nvm, run `nvm install` from the repository root.
 
 ```sh
 npm ci
