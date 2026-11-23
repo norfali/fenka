@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
+import { testimonials } from '../lib/testimonials';
 
 const browserIssues = new WeakMap<Page, string[]>();
 const atlasTitle =
@@ -482,45 +483,89 @@ test('engineering icons hold their active pose and settle on blur', async ({
   }
 });
 
-test('testimonials expand by keyboard while the featured quotes stay in place', async ({
+test('featured testimonials link to the full page by keyboard', async ({
   page,
+  request,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   const section = page.getByRole('region', { name: 'Kind words' });
-  const toggle = section.getByRole('button', { name: 'All testimonials' });
-  const featured = section.locator('.testimonial-featured');
-  const remaining = section.locator('#remaining-testimonials');
-  const chicago = featured.locator('figcaption').filter({ hasText: 'Chicago' });
-  await expect(
-    chicago.getByText('Former engineer', { exact: true }),
-  ).toBeVisible();
-  await expect(chicago.getByText('Morningstar', { exact: true })).toBeVisible();
-  const milan = featured.locator('figcaption').filter({ hasText: 'Milan' });
-  await expect(
-    milan.getByText('Former colleague', { exact: true }),
-  ).toBeVisible();
-  await expect(featured.locator('blockquote:visible')).toHaveCount(2);
-  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(remaining).toBeHidden();
-  await expect(section.getByRole('button')).toHaveCount(1);
+  const link = section.getByRole('link', { name: 'All testimonials' });
+  await expect(link).toHaveAttribute('href', '/testimonials/');
+  await expect(section.getByRole('button')).toHaveCount(0);
+  await expect(section.locator('blockquote p')).toHaveText(
+    testimonials.slice(0, 2).map(({ homeQuote }) => `[…] ${homeQuote} […]`),
+  );
+  await expect(section.locator('figcaption span')).toHaveText([
+    'Chicago',
+    'Former designer/engineer · Morningstar',
+    'Chicago',
+    'Former engineer · Morningstar',
+  ]);
+  const firstQuote = section.locator('blockquote').first();
+  await expect(firstQuote.locator('.testimonial-ornament')).toHaveAttribute(
+    'aria-hidden',
+    'true',
+  );
+  expect(await firstQuote.ariaSnapshot()).not.toContain('“');
 
-  await toggle.focus();
-  await page.evaluate(() => document.fonts.ready);
-  const quoteBounds = await featured.boundingBox();
+  await link.focus();
+  await expect(link).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  await expect(remaining.locator('blockquote:visible')).toHaveCount(6);
-  await expect(remaining.getByText('Adam Maxwell')).toBeVisible();
-  await expect(toggle).toBeFocused();
-  expect(await featured.boundingBox()).toEqual(quoteBounds);
+  await expect(page).toHaveURL('/testimonials/');
+  await expect(page).toHaveTitle('Testimonials · Fenka');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Testimonials',
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://fenka.co.uk/testimonials/',
+  );
+  await expect(
+    page.getByRole('navigation', { name: 'Main navigation' })
+      .getByRole('link', { name: 'Testimonials' }),
+  ).toHaveCount(0);
+  const list = page.locator('.testimonial-list');
+  const quotes = list.locator('blockquote');
+  await expect(quotes).toHaveCount(testimonials.length);
+  await expect(list.locator('blockquote p')).toHaveText(
+    testimonials.flatMap(({ quote }) => quote.split('\n\n')),
+  );
+  await expect(quotes.nth(0).locator('p')).toHaveCount(4);
+  await expect(quotes.nth(1).locator('p')).toHaveCount(2);
+  await expect(list.locator('figcaption .eyebrow')).toHaveText([
+    'Chicago',
+    'Chicago',
+    'Milan',
+  ]);
+  await expect(list.locator('.testimonial-attribution')).toHaveText([
+    'Former designer/engineer · Morningstar',
+    'Former engineer · Morningstar',
+    'Adam Maxwell',
+    'Former colleague',
+    'Neil Morrissey',
+    'Chris Newell',
+    'James Lawler',
+    'Jackie Maxton',
+  ]);
+  await expect(list.locator('.testimonial-attribution + span')).toHaveText([
+    'Touchscreen Tales Ltd',
+    'Actor/Tangent TV',
+    'Interlinked Media (formerly TextYou Ltd)',
+    'IFS New Media',
+    'JAM Marketing Limited',
+  ]);
+  await expect(list.locator('.testimonial-ornament[aria-hidden="true"]'))
+    .toHaveCount(testimonials.length);
   expect(
-    await remaining.evaluate((el) => el.getAnimations({ subtree: true })),
+    await page.getByRole('main').evaluate((el) => el.getAnimations({ subtree: true })),
   ).toHaveLength(0);
 
-  await page.keyboard.press('Space');
-  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(remaining).toBeHidden();
-  await expect(toggle).toBeFocused();
+  const sitemap = await request.get('/sitemap.xml');
+  expect(sitemap.ok()).toBe(true);
+  expect(await sitemap.text()).toContain(
+    '<loc>https://fenka.co.uk/testimonials/</loc>',
+  );
 });
 
 test('navigation keeps the same painted shell and only transitions the incoming introduction', async ({
@@ -649,6 +694,7 @@ test('keyboard navigation starts with the skip link', async ({ page }) => {
 const pages = [
   '/',
   '/about/',
+  '/testimonials/',
   '/projects/',
   '/projects/ai-playground/',
   '/projects/london-ai-atlas/',

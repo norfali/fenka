@@ -6,7 +6,7 @@ import {
   TechnicalList,
 } from '@/components/editorial';
 import { FocusIcon, type FocusIconKind } from '@/components/focus-icon';
-import { Testimonials } from '@/components/testimonials';
+import { FeaturedTestimonials } from '@/components/testimonials';
 import { journalEntries } from '@/lib/journal';
 import { description, pageMetadata, socials } from '@/lib/site';
 
@@ -135,7 +135,7 @@ export default function Home() {
         />
         <JournalList entries={entries} />
       </section>
-      <Testimonials />
+      <FeaturedTestimonials />
     </>
   );
 }

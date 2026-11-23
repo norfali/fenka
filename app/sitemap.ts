@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       '/',
       '/about/',
       '/projects/',
+      '/testimonials/',
       '/writing/',
       ...featuredProjects.map(({ slug }) => `/projects/${slug}/`),
     ].map((path) => ({ url: `${origin}${path}` })),
